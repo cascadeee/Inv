@@ -50,10 +50,11 @@
             tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabControl1.ItemSize = new Size(30, 100);
             tabControl1.Location = new Point(0, 0);
+            tabControl1.Margin = new Padding(3, 4, 3, 4);
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1024, 550);
+            tabControl1.Size = new Size(1170, 733);
             tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 0;
             tabControl1.DrawItem += tabControl1_DrawItem;
@@ -65,9 +66,10 @@
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(panel1);
             tabPage1.Location = new Point(104, 4);
+            tabPage1.Margin = new Padding(3, 4, 3, 4);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(916, 542);
+            tabPage1.Padding = new Padding(3, 4, 3, 4);
+            tabPage1.Size = new Size(1062, 725);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "База данных";
             tabPage1.UseVisualStyleBackColor = true;
@@ -75,9 +77,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(411, 437);
+            label3.Location = new Point(470, 583);
             label3.Name = "label3";
-            label3.Size = new Size(124, 15);
+            label3.Size = new Size(158, 20);
             label3.TabIndex = 3;
             label3.Text = "Размер базы данных:";
             // 
@@ -85,9 +87,10 @@
             // 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Items.AddRange(new object[] { "Отключить", "10 сек", "30 сек", "1 мин", "5 мин", "20 мин" });
-            comboBox1.Location = new Point(225, 434);
+            comboBox1.Location = new Point(285, 580);
+            comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(138, 23);
+            comboBox1.Size = new Size(157, 28);
             comboBox1.TabIndex = 2;
             comboBox1.TabStop = false;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -95,9 +98,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(13, 437);
+            label2.Location = new Point(15, 583);
             label2.Name = "label2";
-            label2.Size = new Size(206, 15);
+            label2.Size = new Size(264, 20);
             label2.TabIndex = 1;
             label2.Text = "Автообновление записей с сервера:";
             // 
@@ -106,26 +109,28 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(textBox1);
             panel1.Controls.Add(button1);
-            panel1.Location = new Point(6, 474);
+            panel1.Location = new Point(7, 632);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(902, 61);
+            panel1.Size = new Size(1031, 81);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(6, 9);
+            label1.Location = new Point(7, 12);
             label1.Name = "label1";
-            label1.Size = new Size(613, 15);
+            label1.Size = new Size(785, 20);
             label1.TabIndex = 2;
             label1.Text = "Для удалении всех записей из базы данных введите в поле ниже: «Я хочу удалить все записи из базы данных»";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(3, 35);
+            textBox1.Location = new Point(3, 47);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Я хочу удалить все записи из базы данных";
-            textBox1.Size = new Size(720, 23);
+            textBox1.Size = new Size(822, 27);
             textBox1.TabIndex = 1;
             textBox1.TabStop = false;
             textBox1.TextChanged += textBox1_TextChanged;
@@ -133,9 +138,10 @@
             // button1
             // 
             button1.Enabled = false;
-            button1.Location = new Point(729, 35);
+            button1.Location = new Point(833, 47);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(170, 23);
+            button1.Size = new Size(194, 31);
             button1.TabIndex = 0;
             button1.Text = "Очистить базу данных";
             button1.UseVisualStyleBackColor = true;
@@ -143,11 +149,12 @@
             // 
             // Settings
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1024, 550);
+            ClientSize = new Size(1170, 733);
             Controls.Add(tabControl1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Settings";

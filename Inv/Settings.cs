@@ -10,6 +10,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace Inv
@@ -62,7 +63,7 @@ namespace Inv
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            switch (Trash.autoref)
+            switch (ApplicationData.autoref)
             {
                 case 10000:
                     comboBox1.SelectedIndex = 1;
@@ -83,7 +84,7 @@ namespace Inv
                     comboBox1.SelectedIndex = 0;
                     break;
             }
-            using (SqlConnection connection = new SqlConnection("Data Source=WIN-UAQ8QUDRBSS\\INVENTORY;Initial Catalog=Inv;User ID=root;Password=aezakmi89;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand("SELECT TOP 1(SIZE * 8) / 1024 SizeMB FROM sys.master_files WHERE DB_NAME(database_id) = 'Inv'", connection);
@@ -98,7 +99,7 @@ namespace Inv
                         }
                     }
                     connection.Close();
-                    label3.Text = "Размер файла базы данных: " + String.Join(", ", ValuesFromDB) +" МБ";
+                    label3.Text = "Размер файла базы данных: " + String.Join(", ", ValuesFromDB) + " МБ";
                 }
             }
         }
@@ -127,8 +128,8 @@ namespace Inv
                     temp = 1200000;
                     break;
             }
-            Trash.autoref = temp;
-            Trash.timer.Interval = Trash.autoref;
+            ApplicationData.autoref = temp;
+            ApplicationData.timer.Interval = ApplicationData.autoref;
         }
     }
 }

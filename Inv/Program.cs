@@ -1,6 +1,10 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Diagnostics.Metrics;
+using System.Drawing;
+using System;
 
 namespace Inv
 {
@@ -10,6 +14,7 @@ namespace Inv
         static void Main()
         {
             ApplicationConfiguration.Initialize();
+            Application.Run(new LoadForm());
             Application.Run(new Main());
         }
     }
@@ -21,15 +26,11 @@ namespace Inv
 
         public ApplicationContext()
         {
-            
             Database.EnsureCreated();
-            
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlServer("Data Source=WIN-UAQ8QUDRBSS\\INVENTORY;Initial Catalog=Inv;User ID=root;Password=aezakmi89;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Inv;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        { 
+            optionsBuilder.UseSqlServer(ConfigurationManager.AppSettings["ConnectionString"]);
+        }
     }
-}
 }

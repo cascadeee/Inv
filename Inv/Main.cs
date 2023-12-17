@@ -1,28 +1,29 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Data;
+using System.Configuration;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Runtime.InteropServices;
 
 namespace Inv
 {
-
     public partial class Main : Form
     {
-        public const string CONNECTION_STRING = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Inv;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
-        //public const string CONNECTION_STRING = "Data Source=WIN-UAQ8QUDRBSS\\INVENTORY;Initial Catalog=Inv;User ID=root;Password=aezakmi89;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
 
         public Main()
         {
             InitializeComponent();
-
         }
         public void uploadAdd()
         {
             string sql = "SELECT * FROM GetAdd";
-            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
                 connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
@@ -34,7 +35,7 @@ namespace Inv
         public void uploadSub()
         {
             string sql = "SELECT * FROM GetSub";
-            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
                 connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
@@ -46,7 +47,7 @@ namespace Inv
         public void uploadCur()
         {
             string sql = "SELECT * FROM GetCur WHERE [Кол-во] > 0";
-            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
                 connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
@@ -63,7 +64,6 @@ namespace Inv
             dateTimePicker0.Value = DateTime.Now;
             numericUpDown0.Value = 1;
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -101,12 +101,10 @@ namespace Inv
             if (sb.DialogResult == DialogResult.Yes) uploadCur();
             updateFromBase();
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             withdrawItem();
         }
-
         private void updateFromBase()
         {
             uploadCur();
@@ -117,26 +115,24 @@ namespace Inv
         private void button3_Click(object sender, EventArgs e)
         {
             SearchTextBox.Text = "";
-            Trash.timer.Stop();
-            Trash.timer.Interval = Trash.autoref;
-            Trash.timer.Start();
+            ApplicationData.timer.Stop();
+            ApplicationData.timer.Interval = ApplicationData.autoref;
+            ApplicationData.timer.Start();
             updateFromBase();
         }
-
         private void Main_Load(object sender, EventArgs e)
         {
             updateFromBase();
-            Trash.autoref = int.MaxValue;
-            Trash.timer.Tick += (sender, args) =>
+            ApplicationData.autoref = int.MaxValue;
+            ApplicationData.timer.Tick += (sender, args) =>
             {
-                Trash.timer.Stop();
-                if (!Trash.isSearching) updateFromBase();
-                Trash.timer.Interval = Trash.autoref;
-                Trash.timer.Start();
+                ApplicationData.timer.Stop();
+                if (!ApplicationData.isSearching) updateFromBase();
+                ApplicationData.timer.Interval = ApplicationData.autoref;
+                ApplicationData.timer.Start();
             };
-            Trash.timer.Start();
+            ApplicationData.timer.Start();
         }
-
         private void dataGridView3_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -158,7 +154,7 @@ namespace Inv
 
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
-            Trash.isSearching = true;
+            ApplicationData.isSearching = true;
             var value = SearchTextBox.Text;
 
             if (tabControl1.SelectedIndex == 0)
@@ -168,10 +164,10 @@ namespace Inv
                 if (value.Length == 0)
                 {
                     sql = "SELECT * FROM GetCur WHERE [Кол-во] > 0";
-                    Trash.isSearching = false;
+                    ApplicationData.isSearching = false;
                 }
 
-                using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
                 {
                     connection.Open();
                     SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
@@ -187,10 +183,10 @@ namespace Inv
                 if (value.Length == 0)
                 {
                     sql = "SELECT * FROM GetAdd";
-                    Trash.isSearching = false;
+                    ApplicationData.isSearching = false;
                 }
 
-                using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
                 {
                     connection.Open();
                     SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
@@ -206,9 +202,9 @@ namespace Inv
                 if (value.Length == 0)
                 {
                     sql = "SELECT * FROM GetSub";
-                    Trash.isSearching = false;
+                    ApplicationData.isSearching = false;
                 }
-                using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
                 {
                     connection.Open();
                     SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
@@ -221,12 +217,12 @@ namespace Inv
 
         private void contextMenuStrip1_Opened(object sender, EventArgs e)
         {
-            Trash.isSearching = true;
+            ApplicationData.isSearching = true;
         }
 
         private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
-            Trash.isSearching = false;
+            ApplicationData.isSearching = false;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -280,12 +276,12 @@ namespace Inv
 
         private void contextMenuStrip2_Opened(object sender, EventArgs e)
         {
-            Trash.isSearching = true;
+            ApplicationData.isSearching = true;
         }
 
         private void contextMenuStrip2_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
-            Trash.isSearching = false;
+            ApplicationData.isSearching = false;
         }
 
         private void dataGridView2_MouseDown(object sender, MouseEventArgs e)
@@ -324,13 +320,8 @@ namespace Inv
                 updateFromBase();
             }
         }
-
-        private void contextMenuStrip3_Opened(object sender, EventArgs e)
-        {
-            
-        }
     }
-    class Trash
+    class ApplicationData
     {
         public static int autoref;
         public static System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer { Interval = 1 };

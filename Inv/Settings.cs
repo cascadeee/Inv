@@ -27,8 +27,8 @@ namespace Inv
         {
             Graphics g = e.Graphics;
             Brush _textBrush;
-            TabPage _tabPage = tabControl1.TabPages[e.Index];
-            Rectangle _tabBounds = tabControl1.GetTabRect(e.Index);
+            TabPage _tabPage = settingsTabControl.TabPages[e.Index];
+            Rectangle _tabBounds = settingsTabControl.GetTabRect(e.Index);
             if (e.State == DrawItemState.Selected)
                 _textBrush = new SolidBrush(Color.Gray);
             else
@@ -45,8 +45,8 @@ namespace Inv
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (textBox1.Text == "Я хочу удалить все записи из базы данных") button1.Enabled = true;
-            else button1.Enabled = false;
+            if (confirmClearDBTextBox.Text == "Я хочу удалить все записи из базы данных") ClearDBButton.Enabled = true;
+            else ClearDBButton.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,22 +66,22 @@ namespace Inv
             switch (ApplicationData.autoref)
             {
                 case 10000:
-                    comboBox1.SelectedIndex = 1;
+                    updateCooldownComboBox.SelectedIndex = 1;
                     break;
                 case 30000:
-                    comboBox1.SelectedIndex = 2;
+                    updateCooldownComboBox.SelectedIndex = 2;
                     break;
                 case 100000:
-                    comboBox1.SelectedIndex = 3;
+                    updateCooldownComboBox.SelectedIndex = 3;
                     break;
                 case 300000:
-                    comboBox1.SelectedIndex = 4;
+                    updateCooldownComboBox.SelectedIndex = 4;
                     break;
                 case 1200000:
-                    comboBox1.SelectedIndex = 5;
+                    updateCooldownComboBox.SelectedIndex = 5;
                     break;
                 default:
-                    comboBox1.SelectedIndex = 0;
+                    updateCooldownComboBox.SelectedIndex = 0;
                     break;
             }
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
@@ -99,7 +99,7 @@ namespace Inv
                         }
                     }
                     connection.Close();
-                    label3.Text = "Размер файла базы данных: " + String.Join(", ", ValuesFromDB) + " МБ";
+                    infoLabel2.Text = "Размер файла базы данных: " + String.Join(", ", ValuesFromDB) + " МБ";
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace Inv
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int temp = 10000;
-            switch (comboBox1.SelectedIndex)
+            switch (updateCooldownComboBox.SelectedIndex)
             {
                 case 0:
                     temp = int.MaxValue;

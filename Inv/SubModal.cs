@@ -22,9 +22,9 @@ namespace Inv
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                int count = (int)numericUpDown0.Value;
-                Item item = db.Items.Where(x => x.name == textBoxName0.Text && x.code == textBoxCode0.Text && x.inv == textBoxInv0.Text).ToArray()[0];
-                SubItem oper = new SubItem { date = dateTimePicker1.Value.ToLongDateString() + " " + dateTimePicker1.Value.ToLongTimeString(), count = (int)numericUpDown1.Value, item = item, recipient = textBox2.Text };
+                int count = (int)itemCountNumericUpDown.Value;
+                Item item = db.Items.Where(x => x.name == itemNameTextBox.Text && x.code == itemCodeTextBox.Text && x.inv == itemInvTextBox.Text).ToArray()[0];
+                SubItem oper = new SubItem { date = itemWithdrawDataTimePicker.Value.ToLongDateString() + " " + itemWithdrawDataTimePicker.Value.ToLongTimeString(), count = (int)itemWithdrawCountNumericUpDown.Value, item = item, recipient = itemRecipientTextBox.Text };
                 db.SubItems.Add(oper);
                 db.SaveChanges();
             }
@@ -33,7 +33,7 @@ namespace Inv
 
         private void SubModal_Load(object sender, EventArgs e)
         {
-            numericUpDown1.Maximum = numericUpDown0.Value;
+            itemWithdrawCountNumericUpDown.Maximum = itemCountNumericUpDown.Value;
         }
     }
 }

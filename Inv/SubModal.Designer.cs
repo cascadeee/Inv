@@ -28,227 +28,238 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            label8 = new Label();
-            textBox2 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
-            numericUpDown1 = new NumericUpDown();
-            label6 = new Label();
-            label7 = new Label();
-            textBox1 = new TextBox();
-            numericUpDown0 = new NumericUpDown();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            textBoxInv0 = new TextBox();
-            label2 = new Label();
-            textBoxCode0 = new TextBox();
-            label1 = new Label();
-            textBoxName0 = new TextBox();
-            button1 = new Button();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown0).BeginInit();
+            mainPanel = new Panel();
+            itemRecipientLabel = new Label();
+            itemRecipientTextBox = new TextBox();
+            itemWithdrawDataTimePicker = new DateTimePicker();
+            itemWithdrawCountNumericUpDown = new NumericUpDown();
+            itemWithdrawCountLabel = new Label();
+            itemWithdrawDataLabel = new Label();
+            itemArrivalDateTextBox = new TextBox();
+            itemCountNumericUpDown = new NumericUpDown();
+            itemCountLabel = new Label();
+            arrivalDateLabel = new Label();
+            itemInvLabel = new Label();
+            itemInvTextBox = new TextBox();
+            itemCodeLabel = new Label();
+            itemCodeTextBox = new TextBox();
+            itemNameLabel = new Label();
+            itemNameTextBox = new TextBox();
+            withdrawButton = new Button();
+            mainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)itemWithdrawCountNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)itemCountNumericUpDown).BeginInit();
             SuspendLayout();
             // 
-            // panel1
+            // mainPanel
             // 
-            panel1.Controls.Add(label8);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(dateTimePicker1);
-            panel1.Controls.Add(numericUpDown1);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(label7);
-            panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(numericUpDown0);
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(textBoxInv0);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(textBoxCode0);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(textBoxName0);
-            panel1.Controls.Add(button1);
-            panel1.Location = new Point(12, 6);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(261, 446);
-            panel1.TabIndex = 4;
+            mainPanel.Controls.Add(itemRecipientLabel);
+            mainPanel.Controls.Add(itemRecipientTextBox);
+            mainPanel.Controls.Add(itemWithdrawDataTimePicker);
+            mainPanel.Controls.Add(itemWithdrawCountNumericUpDown);
+            mainPanel.Controls.Add(itemWithdrawCountLabel);
+            mainPanel.Controls.Add(itemWithdrawDataLabel);
+            mainPanel.Controls.Add(itemArrivalDateTextBox);
+            mainPanel.Controls.Add(itemCountNumericUpDown);
+            mainPanel.Controls.Add(itemCountLabel);
+            mainPanel.Controls.Add(arrivalDateLabel);
+            mainPanel.Controls.Add(itemInvLabel);
+            mainPanel.Controls.Add(itemInvTextBox);
+            mainPanel.Controls.Add(itemCodeLabel);
+            mainPanel.Controls.Add(itemCodeTextBox);
+            mainPanel.Controls.Add(itemNameLabel);
+            mainPanel.Controls.Add(itemNameTextBox);
+            mainPanel.Controls.Add(withdrawButton);
+            mainPanel.Location = new Point(14, 8);
+            mainPanel.Margin = new Padding(3, 4, 3, 4);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new Size(298, 595);
+            mainPanel.TabIndex = 4;
             // 
-            // label8
+            // itemRecipientLabel
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(2, 327);
-            label8.Name = "label8";
-            label8.Size = new Size(73, 15);
-            label8.TabIndex = 18;
-            label8.Text = "Получатель";
+            itemRecipientLabel.AutoSize = true;
+            itemRecipientLabel.Location = new Point(2, 436);
+            itemRecipientLabel.Name = "itemRecipientLabel";
+            itemRecipientLabel.Size = new Size(90, 20);
+            itemRecipientLabel.TabIndex = 18;
+            itemRecipientLabel.Text = "Получатель";
             // 
-            // textBox2
+            // itemRecipientTextBox
             // 
-            textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox2.Location = new Point(2, 345);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(255, 23);
-            textBox2.TabIndex = 1;
+            itemRecipientTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemRecipientTextBox.Location = new Point(2, 460);
+            itemRecipientTextBox.Margin = new Padding(3, 4, 3, 4);
+            itemRecipientTextBox.Name = "itemRecipientTextBox";
+            itemRecipientTextBox.Size = new Size(291, 27);
+            itemRecipientTextBox.TabIndex = 1;
             // 
-            // dateTimePicker1
+            // itemWithdrawDataTimePicker
             // 
-            dateTimePicker1.Location = new Point(3, 257);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(255, 23);
-            dateTimePicker1.TabIndex = 16;
-            dateTimePicker1.TabStop = false;
+            itemWithdrawDataTimePicker.Location = new Point(3, 343);
+            itemWithdrawDataTimePicker.Margin = new Padding(3, 4, 3, 4);
+            itemWithdrawDataTimePicker.Name = "itemWithdrawDataTimePicker";
+            itemWithdrawDataTimePicker.Size = new Size(291, 27);
+            itemWithdrawDataTimePicker.TabIndex = 16;
+            itemWithdrawDataTimePicker.TabStop = false;
             // 
-            // numericUpDown1
+            // itemWithdrawCountNumericUpDown
             // 
-            numericUpDown1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            numericUpDown1.Location = new Point(3, 301);
-            numericUpDown1.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(255, 23);
-            numericUpDown1.TabIndex = 15;
-            numericUpDown1.TabStop = false;
-            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            itemWithdrawCountNumericUpDown.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemWithdrawCountNumericUpDown.Location = new Point(3, 401);
+            itemWithdrawCountNumericUpDown.Margin = new Padding(3, 4, 3, 4);
+            itemWithdrawCountNumericUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            itemWithdrawCountNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            itemWithdrawCountNumericUpDown.Name = "itemWithdrawCountNumericUpDown";
+            itemWithdrawCountNumericUpDown.Size = new Size(291, 27);
+            itemWithdrawCountNumericUpDown.TabIndex = 15;
+            itemWithdrawCountNumericUpDown.TabStop = false;
+            itemWithdrawCountNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // label6
+            // itemWithdrawCountLabel
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(3, 283);
-            label6.Name = "label6";
-            label6.Size = new Size(128, 15);
-            label6.TabIndex = 14;
-            label6.Text = "Количество к расходу";
+            itemWithdrawCountLabel.AutoSize = true;
+            itemWithdrawCountLabel.Location = new Point(3, 377);
+            itemWithdrawCountLabel.Name = "itemWithdrawCountLabel";
+            itemWithdrawCountLabel.Size = new Size(160, 20);
+            itemWithdrawCountLabel.TabIndex = 14;
+            itemWithdrawCountLabel.Text = "Количество к расходу";
             // 
-            // label7
+            // itemWithdrawDataLabel
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(3, 239);
-            label7.Name = "label7";
-            label7.Size = new Size(87, 15);
-            label7.TabIndex = 13;
-            label7.Text = "Дата списания";
+            itemWithdrawDataLabel.AutoSize = true;
+            itemWithdrawDataLabel.Location = new Point(3, 319);
+            itemWithdrawDataLabel.Name = "itemWithdrawDataLabel";
+            itemWithdrawDataLabel.Size = new Size(111, 20);
+            itemWithdrawDataLabel.TabIndex = 13;
+            itemWithdrawDataLabel.Text = "Дата списания";
             // 
-            // textBox1
+            // itemArrivalDateTextBox
             // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(2, 169);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(255, 23);
-            textBox1.TabIndex = 12;
-            textBox1.TabStop = false;
+            itemArrivalDateTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemArrivalDateTextBox.Enabled = false;
+            itemArrivalDateTextBox.Location = new Point(2, 225);
+            itemArrivalDateTextBox.Margin = new Padding(3, 4, 3, 4);
+            itemArrivalDateTextBox.Name = "itemArrivalDateTextBox";
+            itemArrivalDateTextBox.Size = new Size(291, 27);
+            itemArrivalDateTextBox.TabIndex = 12;
+            itemArrivalDateTextBox.TabStop = false;
             // 
-            // numericUpDown0
+            // itemCountNumericUpDown
             // 
-            numericUpDown0.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            numericUpDown0.Enabled = false;
-            numericUpDown0.Location = new Point(3, 213);
-            numericUpDown0.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            numericUpDown0.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown0.Name = "numericUpDown0";
-            numericUpDown0.Size = new Size(255, 23);
-            numericUpDown0.TabIndex = 11;
-            numericUpDown0.TabStop = false;
-            numericUpDown0.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            itemCountNumericUpDown.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemCountNumericUpDown.Enabled = false;
+            itemCountNumericUpDown.Location = new Point(3, 284);
+            itemCountNumericUpDown.Margin = new Padding(3, 4, 3, 4);
+            itemCountNumericUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            itemCountNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            itemCountNumericUpDown.Name = "itemCountNumericUpDown";
+            itemCountNumericUpDown.Size = new Size(291, 27);
+            itemCountNumericUpDown.TabIndex = 11;
+            itemCountNumericUpDown.TabStop = false;
+            itemCountNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // label5
+            // itemCountLabel
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(3, 195);
-            label5.Name = "label5";
-            label5.Size = new Size(121, 15);
-            label5.TabIndex = 10;
-            label5.Text = "Текущее количество";
+            itemCountLabel.AutoSize = true;
+            itemCountLabel.Location = new Point(3, 260);
+            itemCountLabel.Name = "itemCountLabel";
+            itemCountLabel.Size = new Size(150, 20);
+            itemCountLabel.TabIndex = 10;
+            itemCountLabel.Text = "Текущее количество";
             // 
-            // label4
+            // arrivalDateLabel
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(3, 151);
-            label4.Name = "label4";
-            label4.Size = new Size(106, 15);
-            label4.TabIndex = 8;
-            label4.Text = "Дата поступления";
+            arrivalDateLabel.AutoSize = true;
+            arrivalDateLabel.Location = new Point(3, 201);
+            arrivalDateLabel.Name = "arrivalDateLabel";
+            arrivalDateLabel.Size = new Size(134, 20);
+            arrivalDateLabel.TabIndex = 8;
+            arrivalDateLabel.Text = "Дата поступления";
             // 
-            // label3
+            // itemInvLabel
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 107);
-            label3.Name = "label3";
-            label3.Size = new Size(48, 15);
-            label3.TabIndex = 6;
-            label3.Text = "Инв. №";
+            itemInvLabel.AutoSize = true;
+            itemInvLabel.Location = new Point(3, 143);
+            itemInvLabel.Name = "itemInvLabel";
+            itemInvLabel.Size = new Size(61, 20);
+            itemInvLabel.TabIndex = 6;
+            itemInvLabel.Text = "Инв. №";
             // 
-            // textBoxInv0
+            // itemInvTextBox
             // 
-            textBoxInv0.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxInv0.Enabled = false;
-            textBoxInv0.Location = new Point(3, 125);
-            textBoxInv0.Name = "textBoxInv0";
-            textBoxInv0.Size = new Size(255, 23);
-            textBoxInv0.TabIndex = 5;
-            textBoxInv0.TabStop = false;
+            itemInvTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemInvTextBox.Enabled = false;
+            itemInvTextBox.Location = new Point(3, 167);
+            itemInvTextBox.Margin = new Padding(3, 4, 3, 4);
+            itemInvTextBox.Name = "itemInvTextBox";
+            itemInvTextBox.Size = new Size(291, 27);
+            itemInvTextBox.TabIndex = 5;
+            itemInvTextBox.TabStop = false;
             // 
-            // label2
+            // itemCodeLabel
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 63);
-            label2.Name = "label2";
-            label2.Size = new Size(53, 15);
-            label2.TabIndex = 4;
-            label2.Text = "Артикул";
+            itemCodeLabel.AutoSize = true;
+            itemCodeLabel.Location = new Point(3, 84);
+            itemCodeLabel.Name = "itemCodeLabel";
+            itemCodeLabel.Size = new Size(65, 20);
+            itemCodeLabel.TabIndex = 4;
+            itemCodeLabel.Text = "Артикул";
             // 
-            // textBoxCode0
+            // itemCodeTextBox
             // 
-            textBoxCode0.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxCode0.Enabled = false;
-            textBoxCode0.Location = new Point(3, 81);
-            textBoxCode0.Name = "textBoxCode0";
-            textBoxCode0.Size = new Size(255, 23);
-            textBoxCode0.TabIndex = 3;
-            textBoxCode0.TabStop = false;
+            itemCodeTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemCodeTextBox.Enabled = false;
+            itemCodeTextBox.Location = new Point(3, 108);
+            itemCodeTextBox.Margin = new Padding(3, 4, 3, 4);
+            itemCodeTextBox.Name = "itemCodeTextBox";
+            itemCodeTextBox.Size = new Size(291, 27);
+            itemCodeTextBox.TabIndex = 3;
+            itemCodeTextBox.TabStop = false;
             // 
-            // label1
+            // itemNameLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 19);
-            label1.Name = "label1";
-            label1.Size = new Size(90, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Наименование";
+            itemNameLabel.AutoSize = true;
+            itemNameLabel.Location = new Point(3, 25);
+            itemNameLabel.Name = "itemNameLabel";
+            itemNameLabel.Size = new Size(116, 20);
+            itemNameLabel.TabIndex = 2;
+            itemNameLabel.Text = "Наименование";
             // 
-            // textBoxName0
+            // itemNameTextBox
             // 
-            textBoxName0.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxName0.Enabled = false;
-            textBoxName0.Location = new Point(3, 37);
-            textBoxName0.Name = "textBoxName0";
-            textBoxName0.Size = new Size(255, 23);
-            textBoxName0.TabIndex = 1;
-            textBoxName0.TabStop = false;
+            itemNameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            itemNameTextBox.Enabled = false;
+            itemNameTextBox.Location = new Point(3, 49);
+            itemNameTextBox.Margin = new Padding(3, 4, 3, 4);
+            itemNameTextBox.Name = "itemNameTextBox";
+            itemNameTextBox.Size = new Size(291, 27);
+            itemNameTextBox.TabIndex = 1;
+            itemNameTextBox.TabStop = false;
             // 
-            // button1
+            // withdrawButton
             // 
-            button1.AutoSize = true;
-            button1.DialogResult = DialogResult.Yes;
-            button1.Dock = DockStyle.Bottom;
-            button1.Location = new Point(0, 403);
-            button1.Name = "button1";
-            button1.Size = new Size(261, 43);
-            button1.TabIndex = 0;
-            button1.TabStop = false;
-            button1.Text = "Расход";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            withdrawButton.AutoSize = true;
+            withdrawButton.DialogResult = DialogResult.Yes;
+            withdrawButton.Dock = DockStyle.Bottom;
+            withdrawButton.Location = new Point(0, 538);
+            withdrawButton.Margin = new Padding(3, 4, 3, 4);
+            withdrawButton.Name = "withdrawButton";
+            withdrawButton.Size = new Size(298, 57);
+            withdrawButton.TabIndex = 0;
+            withdrawButton.TabStop = false;
+            withdrawButton.Text = "Расход";
+            withdrawButton.UseVisualStyleBackColor = true;
+            withdrawButton.Click += button1_Click;
             // 
             // SubModal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(281, 464);
-            Controls.Add(panel1);
+            ClientSize = new Size(321, 619);
+            Controls.Add(mainPanel);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "SubModal";
@@ -256,32 +267,32 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Load += SubModal_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown0).EndInit();
+            mainPanel.ResumeLayout(false);
+            mainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)itemWithdrawCountNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)itemCountNumericUpDown).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private Label label1;
-        private Button button1;
-        public TextBox textBoxName0;
-        public NumericUpDown numericUpDown0;
-        public TextBox textBoxInv0;
-        public TextBox textBoxCode0;
-        public TextBox textBox1;
-        public NumericUpDown numericUpDown1;
-        private Label label6;
-        private Label label7;
-        private DateTimePicker dateTimePicker1;
-        private Label label8;
-        public TextBox textBox2;
+        private Panel mainPanel;
+        private Label itemCountLabel;
+        private Label arrivalDateLabel;
+        private Label itemInvLabel;
+        private Label itemCodeLabel;
+        private Label itemNameLabel;
+        private Button withdrawButton;
+        public TextBox itemNameTextBox;
+        public NumericUpDown itemCountNumericUpDown;
+        public TextBox itemInvTextBox;
+        public TextBox itemCodeTextBox;
+        public TextBox itemArrivalDateTextBox;
+        public NumericUpDown itemWithdrawCountNumericUpDown;
+        private Label itemWithdrawCountLabel;
+        private Label itemWithdrawDataLabel;
+        private DateTimePicker itemWithdrawDataTimePicker;
+        private Label itemRecipientLabel;
+        public TextBox itemRecipientTextBox;
     }
 }

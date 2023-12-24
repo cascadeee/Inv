@@ -28,42 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tabControl1 = new TabControl();
+            settingsTabControl = new TabControl();
             tabPage1 = new TabPage();
-            label3 = new Label();
-            comboBox1 = new ComboBox();
-            label2 = new Label();
+            infoLabel2 = new Label();
+            updateCooldownComboBox = new ComboBox();
+            infoLabel1 = new Label();
             panel1 = new Panel();
-            label1 = new Label();
-            textBox1 = new TextBox();
-            button1 = new Button();
-            tabControl1.SuspendLayout();
+            infoLabel3 = new Label();
+            confirmClearDBTextBox = new TextBox();
+            ClearDBButton = new Button();
+            settingsTabControl.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // tabControl1
+            // settingsTabControl
             // 
-            tabControl1.Alignment = TabAlignment.Left;
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Dock = DockStyle.Fill;
-            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
-            tabControl1.ItemSize = new Size(30, 100);
-            tabControl1.Location = new Point(0, 0);
-            tabControl1.Margin = new Padding(3, 4, 3, 4);
-            tabControl1.Multiline = true;
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1170, 733);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
-            tabControl1.TabIndex = 0;
-            tabControl1.DrawItem += tabControl1_DrawItem;
+            settingsTabControl.Alignment = TabAlignment.Left;
+            settingsTabControl.Controls.Add(tabPage1);
+            settingsTabControl.Dock = DockStyle.Fill;
+            settingsTabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
+            settingsTabControl.ItemSize = new Size(30, 100);
+            settingsTabControl.Location = new Point(0, 0);
+            settingsTabControl.Margin = new Padding(3, 4, 3, 4);
+            settingsTabControl.Multiline = true;
+            settingsTabControl.Name = "settingsTabControl";
+            settingsTabControl.SelectedIndex = 0;
+            settingsTabControl.Size = new Size(1170, 733);
+            settingsTabControl.SizeMode = TabSizeMode.Fixed;
+            settingsTabControl.TabIndex = 0;
+            settingsTabControl.DrawItem += tabControl1_DrawItem;
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(label3);
-            tabPage1.Controls.Add(comboBox1);
-            tabPage1.Controls.Add(label2);
+            tabPage1.Controls.Add(infoLabel2);
+            tabPage1.Controls.Add(updateCooldownComboBox);
+            tabPage1.Controls.Add(infoLabel1);
             tabPage1.Controls.Add(panel1);
             tabPage1.Location = new Point(104, 4);
             tabPage1.Margin = new Padding(3, 4, 3, 4);
@@ -74,85 +74,85 @@
             tabPage1.Text = "База данных";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // infoLabel2
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(470, 583);
-            label3.Name = "label3";
-            label3.Size = new Size(158, 20);
-            label3.TabIndex = 3;
-            label3.Text = "Размер базы данных:";
+            infoLabel2.AutoSize = true;
+            infoLabel2.Location = new Point(470, 583);
+            infoLabel2.Name = "infoLabel2";
+            infoLabel2.Size = new Size(158, 20);
+            infoLabel2.TabIndex = 3;
+            infoLabel2.Text = "Размер базы данных:";
             // 
-            // comboBox1
+            // updateCooldownComboBox
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Items.AddRange(new object[] { "Отключить", "10 сек", "30 сек", "1 мин", "5 мин", "20 мин" });
-            comboBox1.Location = new Point(285, 580);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(157, 28);
-            comboBox1.TabIndex = 2;
-            comboBox1.TabStop = false;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            updateCooldownComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            updateCooldownComboBox.Items.AddRange(new object[] { "Отключить", "10 сек", "30 сек", "1 мин", "5 мин", "20 мин" });
+            updateCooldownComboBox.Location = new Point(285, 580);
+            updateCooldownComboBox.Margin = new Padding(3, 4, 3, 4);
+            updateCooldownComboBox.Name = "updateCooldownComboBox";
+            updateCooldownComboBox.Size = new Size(157, 28);
+            updateCooldownComboBox.TabIndex = 2;
+            updateCooldownComboBox.TabStop = false;
+            updateCooldownComboBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // label2
+            // infoLabel1
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(15, 583);
-            label2.Name = "label2";
-            label2.Size = new Size(264, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Автообновление записей с сервера:";
+            infoLabel1.AutoSize = true;
+            infoLabel1.Location = new Point(15, 583);
+            infoLabel1.Name = "infoLabel1";
+            infoLabel1.Size = new Size(264, 20);
+            infoLabel1.TabIndex = 1;
+            infoLabel1.Text = "Автообновление записей с сервера:";
             // 
             // panel1
             // 
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(infoLabel3);
+            panel1.Controls.Add(confirmClearDBTextBox);
+            panel1.Controls.Add(ClearDBButton);
             panel1.Location = new Point(7, 632);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(1031, 81);
             panel1.TabIndex = 0;
             // 
-            // label1
+            // infoLabel3
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(7, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(785, 20);
-            label1.TabIndex = 2;
-            label1.Text = "Для удалении всех записей из базы данных введите в поле ниже: «Я хочу удалить все записи из базы данных»";
+            infoLabel3.AutoSize = true;
+            infoLabel3.Location = new Point(7, 12);
+            infoLabel3.Name = "infoLabel3";
+            infoLabel3.Size = new Size(785, 20);
+            infoLabel3.TabIndex = 2;
+            infoLabel3.Text = "Для удалении всех записей из базы данных введите в поле ниже: «Я хочу удалить все записи из базы данных»";
             // 
-            // textBox1
+            // confirmClearDBTextBox
             // 
-            textBox1.Location = new Point(3, 47);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Я хочу удалить все записи из базы данных";
-            textBox1.Size = new Size(822, 27);
-            textBox1.TabIndex = 1;
-            textBox1.TabStop = false;
-            textBox1.TextChanged += textBox1_TextChanged;
+            confirmClearDBTextBox.Location = new Point(3, 47);
+            confirmClearDBTextBox.Margin = new Padding(3, 4, 3, 4);
+            confirmClearDBTextBox.Name = "confirmClearDBTextBox";
+            confirmClearDBTextBox.PlaceholderText = "Я хочу удалить все записи из базы данных";
+            confirmClearDBTextBox.Size = new Size(822, 27);
+            confirmClearDBTextBox.TabIndex = 1;
+            confirmClearDBTextBox.TabStop = false;
+            confirmClearDBTextBox.TextChanged += textBox1_TextChanged;
             // 
-            // button1
+            // ClearDBButton
             // 
-            button1.Enabled = false;
-            button1.Location = new Point(833, 47);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(194, 31);
-            button1.TabIndex = 0;
-            button1.Text = "Очистить базу данных";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            ClearDBButton.Enabled = false;
+            ClearDBButton.Location = new Point(833, 47);
+            ClearDBButton.Margin = new Padding(3, 4, 3, 4);
+            ClearDBButton.Name = "ClearDBButton";
+            ClearDBButton.Size = new Size(194, 31);
+            ClearDBButton.TabIndex = 0;
+            ClearDBButton.Text = "Очистить базу данных";
+            ClearDBButton.UseVisualStyleBackColor = true;
+            ClearDBButton.Click += button1_Click;
             // 
             // Settings
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1170, 733);
-            Controls.Add(tabControl1);
+            Controls.Add(settingsTabControl);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
@@ -163,7 +163,7 @@
             Text = "Настройки";
             TopMost = true;
             Load += Settings_Load;
-            tabControl1.ResumeLayout(false);
+            settingsTabControl.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -173,14 +173,14 @@
 
         #endregion
 
-        private TabControl tabControl1;
+        private TabControl settingsTabControl;
         private TabPage tabPage1;
-        private TextBox textBox1;
+        private TextBox confirmClearDBTextBox;
         private Panel panel1;
-        private Button button1;
-        private Label label1;
-        private ComboBox comboBox1;
-        private Label label2;
-        private Label label3;
+        private Button ClearDBButton;
+        private Label infoLabel3;
+        private ComboBox updateCooldownComboBox;
+        private Label infoLabel1;
+        private Label infoLabel2;
     }
 }

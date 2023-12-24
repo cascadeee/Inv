@@ -25,7 +25,7 @@ namespace Inv
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                addDataGridView.DataSource = ds.Tables[0];
             }
         }
         public void uploadSub()
@@ -37,7 +37,7 @@ namespace Inv
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                dataGridView2.DataSource = ds.Tables[0];
+                subDataGridView.DataSource = ds.Tables[0];
             }
         }
         public void uploadCur()
@@ -49,26 +49,26 @@ namespace Inv
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                dataGridView3.DataSource = ds.Tables[0];
+                currentDataGridView.DataSource = ds.Tables[0];
             }
         }
         private void clearAddPanel()
         {
-            textBoxName0.Text = "";
-            textBoxCode0.Text = "";
-            textBoxInv0.Text = "";
-            dateTimePicker0.Value = DateTime.Now;
-            numericUpDown0.Value = 1;
+            itemNameTextBox.Text = "";
+            itemCodeTextBox.Text = "";
+            itemInvTextBox.Text = "";
+            itemArrivalDateTimePicker.Value = DateTime.Now;
+            itemCountNumericUpDown.Value = 1;
         }
         private void button1_Click(object sender, EventArgs e)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                string name = textBoxName0.Text;
-                string code = textBoxCode0.Text;
-                string inv = textBoxInv0.Text;
-                string date = dateTimePicker0.Value.ToLongDateString() + " " + dateTimePicker0.Value.ToLongTimeString();
-                int count = (int)numericUpDown0.Value;
+                string name = itemNameTextBox.Text;
+                string code = itemCodeTextBox.Text;
+                string inv = itemInvTextBox.Text;
+                string date = itemArrivalDateTimePicker.Value.ToLongDateString() + " " + itemArrivalDateTimePicker.Value.ToLongTimeString();
+                int count = (int)itemCountNumericUpDown.Value;
                 if (db.Items.Where(x => x.name == name && x.code == code && x.inv == inv).ToArray().Length > 0)
                 {
                     MessageBox.Show("Поступление с подобными параметрами уже существует");
@@ -88,11 +88,11 @@ namespace Inv
         private void withdrawItem()
         {
             SubModal sb = new SubModal();
-            sb.textBoxName0.Text = dataGridView3.SelectedRows[0].Cells[0].Value.ToString();
-            sb.textBoxCode0.Text = dataGridView3.SelectedRows[0].Cells[1].Value.ToString();
-            sb.textBoxInv0.Text = dataGridView3.SelectedRows[0].Cells[2].Value.ToString();
-            sb.textBox1.Text = dataGridView3.SelectedRows[0].Cells[3].Value.ToString();
-            sb.numericUpDown0.Value = int.Parse(dataGridView3.SelectedRows[0].Cells[5].Value.ToString());
+            sb.itemNameTextBox.Text = currentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+            sb.itemCodeTextBox.Text = currentDataGridView.SelectedRows[0].Cells[1].Value.ToString();
+            sb.itemInvTextBox.Text = currentDataGridView.SelectedRows[0].Cells[2].Value.ToString();
+            sb.itemArrivalDateTextBox.Text = currentDataGridView.SelectedRows[0].Cells[3].Value.ToString();
+            sb.itemCountNumericUpDown.Value = int.Parse(currentDataGridView.SelectedRows[0].Cells[5].Value.ToString());
             sb.ShowDialog();
             if (sb.DialogResult == DialogResult.Yes) uploadCur();
             updateFromBase();
@@ -106,11 +106,11 @@ namespace Inv
             uploadCur();
             uploadAdd();
             uploadSub();
-            label6.Text = "Последнее обновление: " + DateTime.Now;
+            lastUpdateTimeLabel.Text = "Последнее обновление: " + DateTime.Now;
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            SearchTextBox.Text = "";
+            searchTextBox.Text = "";
             ApplicationData.timer.Stop();
             ApplicationData.timer.Interval = ApplicationData.autoref;
             ApplicationData.timer.Start();
@@ -133,12 +133,12 @@ namespace Inv
         {
             if (e.Button == MouseButtons.Right)
             {
-                var hit = dataGridView3.HitTest(e.X, e.Y);
+                var hit = currentDataGridView.HitTest(e.X, e.Y);
                 if (hit.RowIndex >= 0)
                 {
-                    dataGridView3.ClearSelection();
-                    dataGridView3.Rows[hit.RowIndex].Selected = true;
-                    contextMenuStrip1.Show(dataGridView3, e.Location);
+                    currentDataGridView.ClearSelection();
+                    currentDataGridView.Rows[hit.RowIndex].Selected = true;
+                    subItemContextMenuStrip.Show(currentDataGridView, e.Location);
                 }
             }
         }
@@ -151,9 +151,9 @@ namespace Inv
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             ApplicationData.isSearching = true;
-            var value = SearchTextBox.Text;
+            var value = searchTextBox.Text;
 
-            if (tabControl1.SelectedIndex == 0)
+            if (MainTabControl.SelectedIndex == 0)
             {
                 string sql = $"SELECT * FROM GetCur WHERE ([Наименование] LIKE N'%{value}%'" +
                     $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%') AND [Кол-во] > 0";
@@ -169,10 +169,10 @@ namespace Inv
                     SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                     DataSet ds = new DataSet();
                     adapter.Fill(ds);
-                    dataGridView3.DataSource = ds.Tables[0];
+                    currentDataGridView.DataSource = ds.Tables[0];
                 }
             }
-            if (tabControl1.SelectedIndex == 1)
+            if (MainTabControl.SelectedIndex == 1)
             {
                 string sql = $"SELECT * FROM GetAdd WHERE ([Наименование] LIKE N'%{value}%'" +
                     $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%')";
@@ -188,10 +188,10 @@ namespace Inv
                     SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                     DataSet ds = new DataSet();
                     adapter.Fill(ds);
-                    dataGridView1.DataSource = ds.Tables[0];
+                    addDataGridView.DataSource = ds.Tables[0];
                 }
             }
-            if (tabControl1.SelectedIndex == 2)
+            if (MainTabControl.SelectedIndex == 2)
             {
                 string sql = $"SELECT * FROM GetSub WHERE ([Наименование] LIKE N'%{value}%'" +
                     $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%')";
@@ -206,7 +206,7 @@ namespace Inv
                     SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                     DataSet ds = new DataSet();
                     adapter.Fill(ds);
-                    dataGridView2.DataSource = ds.Tables[0];
+                    subDataGridView.DataSource = ds.Tables[0];
                 }
             }
         }
@@ -223,7 +223,7 @@ namespace Inv
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SearchTextBox.Clear();
+            searchTextBox.Clear();
             SearchTextBox_TextChanged(sender, e);
         }
 
@@ -238,12 +238,12 @@ namespace Inv
         {
             if (e.Button == MouseButtons.Right)
             {
-                var hit = dataGridView1.HitTest(e.X, e.Y);
+                var hit = addDataGridView.HitTest(e.X, e.Y);
                 if (hit.RowIndex >= 0)
                 {
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Rows[hit.RowIndex].Selected = true;
-                    contextMenuStrip2.Show(dataGridView1, e.Location);
+                    addDataGridView.ClearSelection();
+                    addDataGridView.Rows[hit.RowIndex].Selected = true;
+                    removeAddRecordContextMenuStrip.Show(addDataGridView, e.Location);
                 }
             }
         }
@@ -254,9 +254,9 @@ namespace Inv
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Item[] items = db.Items.Where(x => x.name == dataGridView1.SelectedRows[0].Cells[0].Value.ToString() &&
-                                                    x.code == dataGridView1.SelectedRows[0].Cells[1].Value.ToString() &&
-                                                    x.inv == dataGridView1.SelectedRows[0].Cells[2].Value.ToString()
+                    Item[] items = db.Items.Where(x => x.name == addDataGridView.SelectedRows[0].Cells[0].Value.ToString() &&
+                                                    x.code == addDataGridView.SelectedRows[0].Cells[1].Value.ToString() &&
+                                                    x.inv == addDataGridView.SelectedRows[0].Cells[2].Value.ToString()
                                               ).ToArray();
                     if (items.Length == 0)
                         MessageBox.Show("Запись не найдена", "Ошибка");
@@ -284,12 +284,12 @@ namespace Inv
         {
             if (e.Button == MouseButtons.Right)
             {
-                var hit = dataGridView2.HitTest(e.X, e.Y);
+                var hit = subDataGridView.HitTest(e.X, e.Y);
                 if (hit.RowIndex >= 0)
                 {
-                    dataGridView2.ClearSelection();
-                    dataGridView2.Rows[hit.RowIndex].Selected = true;
-                    contextMenuStrip3.Show(dataGridView2, e.Location);
+                    subDataGridView.ClearSelection();
+                    subDataGridView.Rows[hit.RowIndex].Selected = true;
+                    removeSubRecordContextMenuStrip.Show(subDataGridView, e.Location);
                 }
             }
         }
@@ -300,11 +300,11 @@ namespace Inv
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Item item = db.Items.Where(x => x.name == dataGridView2.SelectedRows[0].Cells[0].Value.ToString() &&
-                                                    x.code == dataGridView2.SelectedRows[0].Cells[1].Value.ToString() &&
-                                                    x.inv == dataGridView2.SelectedRows[0].Cells[2].Value.ToString()
+                    Item item = db.Items.Where(x => x.name == subDataGridView.SelectedRows[0].Cells[0].Value.ToString() &&
+                                                    x.code == subDataGridView.SelectedRows[0].Cells[1].Value.ToString() &&
+                                                    x.inv == subDataGridView.SelectedRows[0].Cells[2].Value.ToString()
                                               ).ToArray()[0];
-                    SubItem[] t = db.SubItems.Where(x => x.date == dataGridView2.SelectedRows[0].Cells[3].Value.ToString()).ToArray();
+                    SubItem[] t = db.SubItems.Where(x => x.date == subDataGridView.SelectedRows[0].Cells[3].Value.ToString()).ToArray();
                     if (t.Length == 0)
                         MessageBox.Show("Запись не найдена", "Ошибка");
                     else

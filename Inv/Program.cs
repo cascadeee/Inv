@@ -14,7 +14,7 @@ namespace Inv
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoadForm());
+            Application.Run(new ConnectionForm());
             Application.Run(new Main());
         }
     }

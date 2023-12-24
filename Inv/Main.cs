@@ -12,10 +12,6 @@ namespace Inv
 {
     public partial class Main : Form
     {
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
-
         public Main()
         {
             InitializeComponent();

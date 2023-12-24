@@ -33,40 +33,35 @@
             timer1 = new System.Windows.Forms.Timer(components);
             databaseTextBox = new TextBox();
             databaseLabel = new Label();
-            catalogTextBox = new TextBox();
             catalogLabel = new Label();
             connectionFormPicture = new PictureBox();
             confirmButton = new Button();
+            catalogComboBox = new ComboBox();
+            tryToConnectButton = new Button();
             ((System.ComponentModel.ISupportInitialize)connectionFormPicture).BeginInit();
             SuspendLayout();
             // 
             // databaseTextBox
             // 
-            databaseTextBox.Location = new Point(187, 173);
+            databaseTextBox.Location = new Point(154, 170);
             databaseTextBox.Name = "databaseTextBox";
             databaseTextBox.Size = new Size(242, 27);
             databaseTextBox.TabIndex = 3;
+            databaseTextBox.TextChanged += databaseTextBox_TextChanged;
             // 
             // databaseLabel
             // 
             databaseLabel.AutoSize = true;
-            databaseLabel.Location = new Point(66, 173);
+            databaseLabel.Location = new Point(72, 173);
             databaseLabel.Name = "databaseLabel";
-            databaseLabel.Size = new Size(99, 20);
+            databaseLabel.Size = new Size(60, 20);
             databaseLabel.TabIndex = 2;
-            databaseLabel.Text = "База Данных";
-            // 
-            // catalogTextBox
-            // 
-            catalogTextBox.Location = new Point(187, 213);
-            catalogTextBox.Name = "catalogTextBox";
-            catalogTextBox.Size = new Size(242, 27);
-            catalogTextBox.TabIndex = 5;
+            databaseLabel.Text = "Сервер";
             // 
             // catalogLabel
             // 
             catalogLabel.AutoSize = true;
-            catalogLabel.Location = new Point(66, 213);
+            catalogLabel.Location = new Point(72, 213);
             catalogLabel.Name = "catalogLabel";
             catalogLabel.Size = new Size(63, 20);
             catalogLabel.TabIndex = 4;
@@ -85,7 +80,8 @@
             // 
             // confirmButton
             // 
-            confirmButton.Location = new Point(175, 261);
+            confirmButton.Enabled = false;
+            confirmButton.Location = new Point(175, 254);
             confirmButton.Name = "confirmButton";
             confirmButton.Size = new Size(136, 41);
             confirmButton.TabIndex = 11;
@@ -93,14 +89,37 @@
             confirmButton.UseVisualStyleBackColor = true;
             confirmButton.Click += confirmButton_Click;
             // 
-            // LoadForm
+            // catalogComboBox
+            // 
+            catalogComboBox.Enabled = false;
+            catalogComboBox.FormattingEnabled = true;
+            catalogComboBox.Location = new Point(154, 210);
+            catalogComboBox.Name = "catalogComboBox";
+            catalogComboBox.Size = new Size(242, 28);
+            catalogComboBox.TabIndex = 12;
+            catalogComboBox.SelectedIndexChanged += Validator;
+            // 
+            // tryToConnectButton
+            // 
+            tryToConnectButton.BackgroundImage = (Image)resources.GetObject("tryToConnectButton.BackgroundImage");
+            tryToConnectButton.BackgroundImageLayout = ImageLayout.Stretch;
+            tryToConnectButton.Enabled = false;
+            tryToConnectButton.Location = new Point(402, 169);
+            tryToConnectButton.Name = "tryToConnectButton";
+            tryToConnectButton.Size = new Size(29, 29);
+            tryToConnectButton.TabIndex = 13;
+            tryToConnectButton.UseVisualStyleBackColor = true;
+            tryToConnectButton.Click += tryToConnectButton_Click;
+            // 
+            // ConnectionForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(495, 322);
+            Controls.Add(tryToConnectButton);
+            Controls.Add(catalogComboBox);
             Controls.Add(confirmButton);
             Controls.Add(connectionFormPicture);
-            Controls.Add(catalogTextBox);
             Controls.Add(catalogLabel);
             Controls.Add(databaseTextBox);
             Controls.Add(databaseLabel);
@@ -108,11 +127,11 @@
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "LoadForm";
+            Name = "ConnectionForm";
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "Подключение";
-            FormClosing += ConnectionForm_FormClosing;
+            FormClosed += ConnectionForm_FormClosed;
             Load += ConnectionForm_Load;
             ((System.ComponentModel.ISupportInitialize)connectionFormPicture).EndInit();
             ResumeLayout(false);
@@ -123,9 +142,10 @@
         private System.Windows.Forms.Timer timer1;
         private TextBox databaseTextBox;
         private Label databaseLabel;
-        private TextBox catalogTextBox;
         private Label catalogLabel;
         private PictureBox connectionFormPicture;
         private Button confirmButton;
+        private ComboBox catalogComboBox;
+        private Button tryToConnectButton;
     }
 }

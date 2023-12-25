@@ -57,7 +57,7 @@
             settingsTabControl.Size = new Size(1170, 733);
             settingsTabControl.SizeMode = TabSizeMode.Fixed;
             settingsTabControl.TabIndex = 0;
-            settingsTabControl.DrawItem += tabControl1_DrawItem;
+            settingsTabControl.DrawItem += settingsTabControl_DrawItem;
             // 
             // tabPage1
             // 
@@ -93,7 +93,7 @@
             updateCooldownComboBox.Size = new Size(157, 28);
             updateCooldownComboBox.TabIndex = 2;
             updateCooldownComboBox.TabStop = false;
-            updateCooldownComboBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            updateCooldownComboBox.SelectedIndexChanged += updateCooldownComboBox_SelectedIndexChanged;
             // 
             // infoLabel1
             // 
@@ -133,7 +133,7 @@
             confirmClearDBTextBox.Size = new Size(822, 27);
             confirmClearDBTextBox.TabIndex = 1;
             confirmClearDBTextBox.TabStop = false;
-            confirmClearDBTextBox.TextChanged += textBox1_TextChanged;
+            confirmClearDBTextBox.TextChanged += confirmClearTextBox_TextChanged;
             // 
             // ClearDBButton
             // 
@@ -145,7 +145,7 @@
             ClearDBButton.TabIndex = 0;
             ClearDBButton.Text = "Очистить базу данных";
             ClearDBButton.UseVisualStyleBackColor = true;
-            ClearDBButton.Click += button1_Click;
+            ClearDBButton.Click += clearDBButton_Click;
             // 
             // Settings
             // 

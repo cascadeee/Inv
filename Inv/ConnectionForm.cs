@@ -1,9 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace Inv
 {

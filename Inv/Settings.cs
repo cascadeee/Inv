@@ -1,29 +1,13 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Configuration;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace Inv
 {
-
     public partial class Settings : Form
     {
-        public Settings()
-        {
-            InitializeComponent();
-        }
+        public Settings() => InitializeComponent();
 
-        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        private void settingsTabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
             Graphics g = e.Graphics;
             Brush _textBrush;
@@ -42,14 +26,12 @@ namespace Inv
             _stringFlags.LineAlignment = StringAlignment.Center;
             g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void confirmClearTextBox_TextChanged(object sender, EventArgs e)
         {
             if (confirmClearDBTextBox.Text == "Я хочу удалить все записи из базы данных") ClearDBButton.Enabled = true;
             else ClearDBButton.Enabled = false;
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void clearDBButton_Click(object sender, EventArgs e)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -60,7 +42,6 @@ namespace Inv
             }
             DialogResult = DialogResult.OK;
         }
-
         private void Settings_Load(object sender, EventArgs e)
         {
             switch (ApplicationData.autoref)
@@ -87,24 +68,18 @@ namespace Inv
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("SELECT TOP 1(SIZE * 8) / 1024 SizeMB FROM sys.master_files WHERE DB_NAME(database_id) = 'Inv'", connection);
+                SqlCommand command = new SqlCommand("SELECT TOP 1(SIZE * 8) / 1024 SizeMB FROM sys.master_files WHERE DB_NAME(database_id) = 'master'", connection);
                 using (var reader = command.ExecuteReader())
                 {
                     List<string> ValuesFromDB = new List<string>();
                     while (reader.Read())
-                    {
                         for (int i = 0; i <= reader.FieldCount - 1; i++)
-                        {
                             ValuesFromDB.Add(reader[i].ToString());
-                        }
-                    }
-                    connection.Close();
-                    infoLabel2.Text = "Размер файла базы данных: " + String.Join(", ", ValuesFromDB) + " МБ";
+                    infoLabel2.Text = "Размер файла базы данных: " + ValuesFromDB[0] + " МБ";
                 }
             }
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void updateCooldownComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int temp = 10000;
             switch (updateCooldownComboBox.SelectedIndex)

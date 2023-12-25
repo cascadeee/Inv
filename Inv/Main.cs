@@ -1,66 +1,63 @@
 using Microsoft.Data.SqlClient;
-using Microsoft.VisualBasic.ApplicationServices;
 using System.Data;
 using System.Configuration;
-using System.Diagnostics.Eventing.Reader;
-using System.Windows.Forms;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Runtime.InteropServices;
 
 namespace Inv
 {
     public partial class Main : Form
     {
-        public Main()
+        public Main() => InitializeComponent();
+        private void uploadGrid(int gridIndex, bool onSearch = false)
         {
-            InitializeComponent();
-        }
-        public void uploadAdd()
-        {
-            string sql = "SELECT * FROM GetAdd";
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
+            string sql = ApplicationData.commands[gridIndex];
+            if (onSearch)
             {
-                connection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-                addDataGridView.DataSource = ds.Tables[0];
+                var value = searchTextBox.Text;
+                switch (gridIndex)
+                {
+                    case 0:
+                        sql = $"SELECT * FROM GetAdd WHERE ([Наименование] LIKE N'%{value}%'" +
+                              $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%')";
+                        break;
+                    case 1:
+                        sql = $"SELECT * FROM GetSub WHERE ([Наименование] LIKE N'%{value}%'" +
+                              $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%')";
+                        break;
+                    case 2:
+                        sql = $"SELECT * FROM GetCur WHERE ([Наименование] LIKE N'%{value}%'" +
+                              $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%') AND [Кол-во] > 0";
+                        break;
+                }
             }
-        }
-        public void uploadSub()
-        {
-            string sql = "SELECT * FROM GetSub";
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
                 connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                subDataGridView.DataSource = ds.Tables[0];
-            }
-        }
-        public void uploadCur()
-        {
-            string sql = "SELECT * FROM GetCur WHERE [Кол-во] > 0";
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
-            {
-                connection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-                currentDataGridView.DataSource = ds.Tables[0];
+                switch (gridIndex)
+                {
+                    case 0:
+                        addDataGridView.DataSource = ds.Tables[0];
+                        break;
+                    case 1:
+                        subDataGridView.DataSource = ds.Tables[0];
+                        break;
+                    case 2:
+                        currentDataGridView.DataSource = ds.Tables[0];
+                        break;
+                }
             }
         }
         private void clearAddPanel()
         {
-            itemNameTextBox.Text = "";
-            itemCodeTextBox.Text = "";
-            itemInvTextBox.Text = "";
+            itemNameTextBox.Clear();
+            itemCodeTextBox.Clear();
+            itemInvTextBox.Clear();
             itemArrivalDateTimePicker.Value = DateTime.Now;
             itemCountNumericUpDown.Value = 1;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void addItemButton_Click(object sender, EventArgs e)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -84,31 +81,14 @@ namespace Inv
             clearAddPanel();
             updateFromBase();
         }
-
-        private void withdrawItem()
-        {
-            SubModal sb = new SubModal();
-            sb.itemNameTextBox.Text = currentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
-            sb.itemCodeTextBox.Text = currentDataGridView.SelectedRows[0].Cells[1].Value.ToString();
-            sb.itemInvTextBox.Text = currentDataGridView.SelectedRows[0].Cells[2].Value.ToString();
-            sb.itemArrivalDateTextBox.Text = currentDataGridView.SelectedRows[0].Cells[3].Value.ToString();
-            sb.itemCountNumericUpDown.Value = int.Parse(currentDataGridView.SelectedRows[0].Cells[5].Value.ToString());
-            sb.ShowDialog();
-            if (sb.DialogResult == DialogResult.Yes) uploadCur();
-            updateFromBase();
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            withdrawItem();
-        }
         private void updateFromBase()
         {
-            uploadCur();
-            uploadAdd();
-            uploadSub();
+            uploadGrid(2);
+            uploadGrid(0);
+            uploadGrid(1);
             lastUpdateTimeLabel.Text = "Последнее обновление: " + DateTime.Now;
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
             searchTextBox.Text = "";
             ApplicationData.timer.Stop();
@@ -119,6 +99,7 @@ namespace Inv
         private void Main_Load(object sender, EventArgs e)
         {
             updateFromBase();
+
             ApplicationData.autoref = int.MaxValue;
             ApplicationData.timer.Tick += (sender, args) =>
             {
@@ -129,7 +110,7 @@ namespace Inv
             };
             ApplicationData.timer.Start();
         }
-        private void dataGridView3_MouseDown(object sender, MouseEventArgs e)
+        private void currentDataGridView_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -142,99 +123,55 @@ namespace Inv
                 }
             }
         }
-
-        private void расходToolStripMenuItem_Click(object sender, EventArgs e)
+        private void withdrawToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            withdrawItem();
+            SubModal sb = new SubModal();
+            sb.itemNameTextBox.Text = currentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+            sb.itemCodeTextBox.Text = currentDataGridView.SelectedRows[0].Cells[1].Value.ToString();
+            sb.itemInvTextBox.Text = currentDataGridView.SelectedRows[0].Cells[2].Value.ToString();
+            sb.itemArrivalDateTextBox.Text = currentDataGridView.SelectedRows[0].Cells[3].Value.ToString();
+            sb.itemCountNumericUpDown.Value = int.Parse(currentDataGridView.SelectedRows[0].Cells[5].Value.ToString());
+            sb.ShowDialog();
+            if (sb.DialogResult == DialogResult.Yes) uploadGrid(2);
+            updateFromBase();
         }
-
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
-            ApplicationData.isSearching = true;
-            var value = searchTextBox.Text;
+            ApplicationData.isSearching = searchTextBox.Text.Length>0;
 
-            if (MainTabControl.SelectedIndex == 0)
+            switch (MainTabControl.SelectedIndex)
             {
-                string sql = $"SELECT * FROM GetCur WHERE ([Наименование] LIKE N'%{value}%'" +
-                    $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%') AND [Кол-во] > 0";
-                if (value.Length == 0)
-                {
-                    sql = "SELECT * FROM GetCur WHERE [Кол-во] > 0";
-                    ApplicationData.isSearching = false;
-                }
-
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
-                {
-                    connection.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                    DataSet ds = new DataSet();
-                    adapter.Fill(ds);
-                    currentDataGridView.DataSource = ds.Tables[0];
-                }
-            }
-            if (MainTabControl.SelectedIndex == 1)
-            {
-                string sql = $"SELECT * FROM GetAdd WHERE ([Наименование] LIKE N'%{value}%'" +
-                    $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%')";
-                if (value.Length == 0)
-                {
-                    sql = "SELECT * FROM GetAdd";
-                    ApplicationData.isSearching = false;
-                }
-
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
-                {
-                    connection.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                    DataSet ds = new DataSet();
-                    adapter.Fill(ds);
-                    addDataGridView.DataSource = ds.Tables[0];
-                }
-            }
-            if (MainTabControl.SelectedIndex == 2)
-            {
-                string sql = $"SELECT * FROM GetSub WHERE ([Наименование] LIKE N'%{value}%'" +
-                    $"OR [Артикул] LIKE N'%{value}%' OR [Инв. №] LIKE N'%{value}%')";
-                if (value.Length == 0)
-                {
-                    sql = "SELECT * FROM GetSub";
-                    ApplicationData.isSearching = false;
-                }
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
-                {
-                    connection.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                    DataSet ds = new DataSet();
-                    adapter.Fill(ds);
-                    subDataGridView.DataSource = ds.Tables[0];
-                }
+                case 0:
+                    uploadGrid(2, ApplicationData.isSearching);
+                    break;
+                case 1:
+                    uploadGrid(0, ApplicationData.isSearching);
+                    break;
+                case 2:
+                    uploadGrid(1, ApplicationData.isSearching);
+                    break;
             }
         }
-
-        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        private void contextMenuStripOpenedHandler(object sender, EventArgs e)
         {
             ApplicationData.isSearching = true;
         }
-
-        private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
+        private void contextMenuStripClosedHandler(object sender, ToolStripDropDownClosedEventArgs e)
         {
             ApplicationData.isSearching = false;
         }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             searchTextBox.Clear();
             SearchTextBox_TextChanged(sender, e);
         }
-
-        private void файлToolStripMenuItem_Click(object sender, EventArgs e)
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings settings = new Settings();
             settings.ShowDialog();
             if (settings.DialogResult == DialogResult.OK) updateFromBase();
         }
-
-        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+        private void addDataGridView_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -247,8 +184,7 @@ namespace Inv
                 }
             }
         }
-
-        private void удалитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void removeItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Вы действительно хотите удалить запись о поступлении?", "Подтверждение", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
@@ -269,18 +205,7 @@ namespace Inv
                 updateFromBase();
             }
         }
-
-        private void contextMenuStrip2_Opened(object sender, EventArgs e)
-        {
-            ApplicationData.isSearching = true;
-        }
-
-        private void contextMenuStrip2_Closed(object sender, ToolStripDropDownClosedEventArgs e)
-        {
-            ApplicationData.isSearching = false;
-        }
-
-        private void dataGridView2_MouseDown(object sender, MouseEventArgs e)
+        private void subDataGridView_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -293,8 +218,7 @@ namespace Inv
                 }
             }
         }
-
-        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void removeSubToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Вы действительно хотите удалить запись о расходе?", "Подтверждение", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
@@ -319,6 +243,11 @@ namespace Inv
     }
     class ApplicationData
     {
+        public static string[] commands = {
+                            "SELECT * FROM GetAdd",
+                            "SELECT * FROM GetSub",
+                            "SELECT * FROM GetCur WHERE [Кол-во] > 0"
+                            };
         public static int autoref;
         public static System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer { Interval = 1 };
         public static bool isSearching;

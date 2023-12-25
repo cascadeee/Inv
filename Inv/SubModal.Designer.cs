@@ -250,7 +250,7 @@
             withdrawButton.TabStop = false;
             withdrawButton.Text = "Расход";
             withdrawButton.UseVisualStyleBackColor = true;
-            withdrawButton.Click += button1_Click;
+            withdrawButton.Click += withdrawButton_Click;
             // 
             // SubModal
             // 

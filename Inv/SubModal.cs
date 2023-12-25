@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 
 namespace Inv
 {
     public partial class SubModal : Form
     {
-        public SubModal()
-        {
-            InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        public SubModal() => InitializeComponent();
+        private void withdrawButton_Click(object sender, EventArgs e)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -30,7 +17,6 @@ namespace Inv
             }
             this.Close();
         }
-
         private void SubModal_Load(object sender, EventArgs e)
         {
             itemWithdrawCountNumericUpDown.Maximum = itemCountNumericUpDown.Value;

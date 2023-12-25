@@ -95,7 +95,7 @@
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             settingToolStripMenuItem.Size = new Size(98, 24);
             settingToolStripMenuItem.Text = "Настройки";
-            settingToolStripMenuItem.Click += файлToolStripMenuItem_Click;
+            settingToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
             // 
             // addDataGridView
             // 
@@ -129,7 +129,7 @@
             addDataGridView.Size = new Size(1099, 751);
             addDataGridView.TabIndex = 1;
             addDataGridView.TabStop = false;
-            addDataGridView.MouseDown += dataGridView1_MouseDown;
+            addDataGridView.MouseDown += addDataGridView_MouseDown;
             // 
             // MainTabControl
             // 
@@ -144,7 +144,7 @@
             MainTabControl.Size = new Size(1417, 788);
             MainTabControl.TabIndex = 2;
             MainTabControl.TabStop = false;
-            MainTabControl.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
+            MainTabControl.SelectedIndexChanged += MainTabControl_SelectedIndexChanged;
             // 
             // tek
             // 
@@ -188,7 +188,7 @@
             currentDataGridView.Size = new Size(1408, 751);
             currentDataGridView.TabIndex = 4;
             currentDataGridView.TabStop = false;
-            currentDataGridView.MouseDown += dataGridView3_MouseDown;
+            currentDataGridView.MouseDown += currentDataGridView_MouseDown;
             // 
             // post
             // 
@@ -328,7 +328,7 @@
             addItemButton.TabStop = false;
             addItemButton.Text = "Добавить";
             addItemButton.UseVisualStyleBackColor = true;
-            addItemButton.Click += button1_Click;
+            addItemButton.Click += addItemButton_Click;
             // 
             // ras
             // 
@@ -373,7 +373,7 @@
             subDataGridView.Size = new Size(1403, 747);
             subDataGridView.TabIndex = 2;
             subDataGridView.TabStop = false;
-            subDataGridView.MouseDown += dataGridView2_MouseDown;
+            subDataGridView.MouseDown += subDataGridView_MouseDown;
             // 
             // subItemContextMenuStrip
             // 
@@ -382,8 +382,8 @@
             subItemContextMenuStrip.Name = "contextMenuStrip1";
             subItemContextMenuStrip.ShowImageMargin = false;
             subItemContextMenuStrip.Size = new Size(101, 28);
-            subItemContextMenuStrip.Closed += contextMenuStrip1_Closed;
-            subItemContextMenuStrip.Opened += contextMenuStrip1_Opened;
+            subItemContextMenuStrip.Closed += contextMenuStripClosedHandler;
+            subItemContextMenuStrip.Opened += contextMenuStripOpenedHandler;
             // 
             // расходToolStripMenuItem
             // 
@@ -391,7 +391,7 @@
             расходToolStripMenuItem.Name = "расходToolStripMenuItem";
             расходToolStripMenuItem.Size = new Size(100, 24);
             расходToolStripMenuItem.Text = "Расход";
-            расходToolStripMenuItem.Click += расходToolStripMenuItem_Click;
+            расходToolStripMenuItem.Click += withdrawToolStripMenuItem_Click;
             // 
             // UpdateButton
             // 
@@ -404,7 +404,7 @@
             UpdateButton.TabStop = false;
             UpdateButton.Text = "Обновить";
             UpdateButton.UseVisualStyleBackColor = true;
-            UpdateButton.Click += button3_Click;
+            UpdateButton.Click += UpdateButton_Click;
             // 
             // lastUpdateTimeLabel
             // 
@@ -436,8 +436,8 @@
             removeAddRecordContextMenuStrip.Name = "contextMenuStrip2";
             removeAddRecordContextMenuStrip.ShowImageMargin = false;
             removeAddRecordContextMenuStrip.Size = new Size(110, 28);
-            removeAddRecordContextMenuStrip.Closed += contextMenuStrip2_Closed;
-            removeAddRecordContextMenuStrip.Opened += contextMenuStrip2_Opened;
+            removeAddRecordContextMenuStrip.Closed += contextMenuStripClosedHandler;
+            removeAddRecordContextMenuStrip.Opened += contextMenuStripOpenedHandler;
             // 
             // удалитьToolStripMenuItem1
             // 
@@ -445,7 +445,7 @@
             удалитьToolStripMenuItem1.Name = "удалитьToolStripMenuItem1";
             удалитьToolStripMenuItem1.Size = new Size(109, 24);
             удалитьToolStripMenuItem1.Text = "Удалить";
-            удалитьToolStripMenuItem1.Click += удалитьToolStripMenuItem1_Click;
+            удалитьToolStripMenuItem1.Click += removeItemToolStripMenuItem_Click;
             // 
             // removeSubRecordContextMenuStrip
             // 
@@ -461,7 +461,7 @@
             удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
             удалитьToolStripMenuItem.Size = new Size(109, 24);
             удалитьToolStripMenuItem.Text = "Удалить";
-            удалитьToolStripMenuItem.Click += удалитьToolStripMenuItem_Click;
+            удалитьToolStripMenuItem.Click += removeSubToolStripMenuItem_Click;
             // 
             // Main
             // 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Inv
 {
@@ -62,13 +63,28 @@ namespace Inv
             {
                 connection.Open();
                 DataTable t = connection.GetSchema("Tables");
-
                 List<string> catalogTables = new List<string>();
                 foreach (DataRow item in t.Rows)
                     catalogTables.Add(item[2].ToString());
-                if (catalogTables.All(s => checkList.Contains(s)))
+                if (!checkList.All(s => catalogTables.Contains(s)))
                 {
-                    MessageBox.Show("Данный каталог не настроен для работы с программой\nИнформация для настройки: Справка > Подготовка каталога к работе");
+                    if (MessageBox.Show("Данный каталог не настроен для работы с программой\nВы хотите настроить данный каталог для работы?",
+                        "Подтверждение", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        List<string> scripts = new List<string>();
+                        foreach (string item in File.ReadAllText(@"sql/makeTables.sql").Split("GO", StringSplitOptions.RemoveEmptyEntries))
+                            scripts.Add(item);
+                        scripts.Add(File.ReadAllText(@"sql/GetCurView.sql"));
+                        scripts.Add(File.ReadAllText(@"sql/GetAddView.sql"));
+                        scripts.Add(File.ReadAllText(@"sql/GetSubView.sql"));
+                        foreach (string commandString in scripts)
+                            if (!string.IsNullOrWhiteSpace(commandString.Trim()))
+                                using (var command = new SqlCommand(commandString, connection))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                    }
+                    connection.Close();
                     return;
                 }
 
